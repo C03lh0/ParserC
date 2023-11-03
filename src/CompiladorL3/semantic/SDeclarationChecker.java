@@ -120,6 +120,8 @@ public class SDeclarationChecker  {
 
 	public void setNotInitializedStatusToDeclaration() {
 		this.currentDeclarationStatus = "NOT_INITIALIZED";
+		Type currentType = new Type(Type.checkIfVariableTypeIsValid(currentVariableDeclaration.get(0)));
+		this.currentScope.unDeclaredVariable(currentVariableDeclaration.get(1), currentType, null);
 		notifySubject();
 	}
 
@@ -205,6 +207,10 @@ public class SDeclarationChecker  {
 	private boolean isVariableType(Token currentPart) {
 		return this.currentVariableDeclaration.size() == 0 && Type.checkIfVariableTypeIsValid(currentPart) != -1;
 	}
+
+	public Semantic getSemanticSubject() {
+		return semanticSubject;
+	}
 	
 	@Override
 	public String toString() {
@@ -224,4 +230,3 @@ public class SDeclarationChecker  {
 		return false;
 	}
 }
-

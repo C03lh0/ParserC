@@ -49,6 +49,8 @@ public class Semantic {
 			addTokensForDecisionMaking(token);
 			
 			if(token.getLexema().equals(";") && this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexema()) != null ) {
+				this.state = 1;
+				executeStateOnlast2Tokens();
 				return;
 			} else if(last3TokensIsDeclarationOrOperation[0] !=  null && last3TokensIsDeclarationOrOperation[1] !=  null && last3TokensIsDeclarationOrOperation[2] !=  null) {
 				this.state = 1;
@@ -87,7 +89,7 @@ public class Semantic {
 	public boolean tokenIsAnUninitializedVariable(Token currentToken) {
 		for (SDeclarationChecker sDeclarationChecker : declarationCheckers) {
 			String name = sDeclarationChecker.getCurrentDeclarationName();
-			if (name.equals(currentToken.getLexema())) {
+			if (name.equals(currentToken.getLexema()) && currentSDeclarationChecker.getSemanticSubject().last3TokensIsDeclarationOrOperation[2].getTipo() < 3) {
 				this.currentSDeclarationChecker = sDeclarationChecker;
 				return true;
 			}
@@ -180,13 +182,11 @@ public class Semantic {
 	
 	public void executeStateOnlast2Tokens() throws Exception {
 		
-		if(!tokenIsAnUninitializedVariable(last3TokensIsDeclarationOrOperation[0]) && last3TokensIsDeclarationOrOperation[0] == null) {
+		if(!tokenIsAnUninitializedVariable(last3TokensIsDeclarationOrOperation[0]) && last3TokensIsDeclarationOrOperation[0] != null) {
 			executeCurrentState(last3TokensIsDeclarationOrOperation[0]);
 		}
 		if(last3TokensIsDeclarationOrOperation[1] != null){
 			executeCurrentState(last3TokensIsDeclarationOrOperation[1]);
 		}
-
 	}
-
 }
