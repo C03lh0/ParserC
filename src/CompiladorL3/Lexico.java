@@ -122,18 +122,6 @@ public class Lexico {
 					throw new RuntimeException("Erro: char invalido \"" + lexema.toString() + "\"");
 				}
 				break;
-			case 8:
-				if (isPartOfAquilesToken(currentChar, lexema)) {
-					state = 8;
-					if (currentChar == '#') {
-						//Alterado por @aquilesRod
-						return new Token(lexema.toString(), Token.TIPO_TOKEN_AQUILES);
-					}
-				} else {
-					lexema.append(currentChar);
-					throw new RuntimeException("Erro: aquiles token invalido \"" + lexema.toString() + "\"");
-				}
-				break;
 			case 9:
 				if (!isPartOfAnRelationalOperator(currentChar, state, lexema) || !this.hasNextChar() || currentChar == '\n')
 					return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
@@ -156,16 +144,6 @@ public class Lexico {
 						throw new RuntimeException("Erro: Operadores aritimeticos n�o reconhecido! \"" + lexema.toString() + "\"");
 					}
 				} 
-				break;
-			case 12:
-				if (isBrunoVerification(currentChar, lexema)) {
-					state = 12;
-					if(lexema.length() == 2 && currentChar!='\n'){
-						return new Token(lexema.toString(), Token.TIPO_TOKEN_BRUNO);
-					} else {
-						throw new RuntimeException(" Token Bruno Invalido \"" + lexema.toString() + "\"");
-					}
-				}
 				break;
 			case 99:
 				return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO);
@@ -205,19 +183,13 @@ public class Lexico {
 		} else if (isChar(currentChar)) {
 			lexema.append(currentChar);
 			estado = 7;
-		} else if (isAquilesToken(currentChar)) {
-			lexema.append(currentChar);
-			estado = 8;
 		} else if (isRelationalOperator(currentChar)) {
 			lexema.append(currentChar);
 			estado = 9;
 		} else if (isAArithmeticOperator(currentChar)){
 			lexema.append(currentChar);
 			estado = 11;
-		} else if (isBrunoToken(currentChar)) {
-            lexema.append(currentChar);
-            estado = 12;
-        } else {
+		} else {
 			lexema.append(currentChar);
 			throw new RuntimeException("Erro: token invalido \"" + lexema.toString() + "\"");
 		}
@@ -236,21 +208,6 @@ public class Lexico {
 	private boolean isPartOfChar (char c, StringBuffer lex) {
 		if (!((this.isDigit(c) || this.isLowerCaseLetter(c)) && lex.length() == 1) 
 				&& !(c == "'".charAt(0) && lex.length() == 2)) {
-			return false;
-		}
-		lex.append(c);
-		return true;
-	}
-	
-	private boolean isAquilesToken(char c) {
-		return c == '#';
-	}
-	
-	private boolean isPartOfAquilesToken(char c, StringBuffer lex) {
-		//Alterado por @aquilesRod
-		if (!(this.isDigit(c)) && !('#' == c)) {
-			return false;
-		} else if ('#' == c && lex.length() == 1) { 
 			return false;
 		}
 		lex.append(c);
@@ -334,21 +291,6 @@ public class Lexico {
 		   throw new RuntimeException("Erro: token invalido \"" + lexema.toString() + "\"");
 	   }
 	}
-
-	private boolean isBrunoVerification(char c, StringBuffer lex){
-        if(c == '&' || lex.length()% 2 == 0) {
-            return false;
-        }else if (c == '\n'){
-            return true;
-        } else {
-            lex.append(c);
-            return c == ':';
-        }
-    }
-
-	private boolean isBrunoToken(char c) {
-        return c == '&';
-    }
 	
 	private boolean isArithmeticOperatorEquals(char currentChar, StringBuffer lexema) {
 		char [] lexemaCharArray = lexema.toString().toCharArray();
@@ -362,5 +304,4 @@ public class Lexico {
 		}
 		return isEquals;
 	}
-
 }

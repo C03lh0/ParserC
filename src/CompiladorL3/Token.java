@@ -10,8 +10,6 @@ public class Token {
     public static int TIPO_CARACTER_ESPECIAL = 6;
     public static int TIPO_PALAVRA_RESERVADA = 7;
     public static int TIPO_OPERADOR_DE_ATRIBUICAO = 8;
-    public static int TIPO_TOKEN_BRUNO= 77;
-    public static int TIPO_TOKEN_AQUILES = 88;
     public static int TIPO_FIM_CODIGO = 99;
     
     private int tipo; //tipo do token
@@ -52,8 +50,6 @@ public class Token {
                 return this.lexema + " - PALAVRA_RESERVADA";
             case 8:
             	return this.lexema + " - OPERADOR_DE_ATRIBUICAO";
-            case 88:
-            	return this.lexema + " - TOKEN_AQUILES";
             case 99:
                 return this.lexema + " - FIM_CODIGO";    
         }
