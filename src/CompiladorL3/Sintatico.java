@@ -117,6 +117,19 @@ public class Sintatico {
     private void goToDeclaretionOrComand() throws Exception {
         if(token.getLexema().equals("int") || token.getLexema().equals("float") || token.getLexema().equals("char") || isReservedWorld(token.getLexema()) ||
         token.getLexema().equals("{") || isComand()){
+
+            if(token.getLexema().equals("return")){
+                token = lexicalAnalyzer.nextToken();
+                if(token.getLexema().equals("0")){
+                    token = lexicalAnalyzer.nextToken();
+                    if(token.getLexema().equals(";")){
+                        token = lexicalAnalyzer.nextToken();
+                        
+                    }
+                }
+                return;
+            }
+
             this.declaretaionOrComand();
             this.goToDeclaretionOrComand();
         }
@@ -209,6 +222,14 @@ public class Sintatico {
         }
 
         token = lexicalAnalyzer.nextToken();
+        if(token.getTipo() == Token.TIPO_OPERADOR_DE_ATRIBUICAO){
+            token = lexicalAnalyzer.nextToken(); 
+            if(!isValidTerm()) {
+        	    throw new RuntimeException("Sim, essa expressao vai receber o que? coloca o valor bença!");
+            }
+            this.arithmeticExpression();
+        }
+
         if(!token.getLexema().equalsIgnoreCase(";")){
             throw new RuntimeException("Eeeeeeeeei bença? Tu vai finalizar a declação de variavel não?");
         }
