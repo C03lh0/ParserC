@@ -1,14 +1,18 @@
-package CompiladorL3;
+package ParserC.sintatic;
 
-public class Sintatico {
-    private Lexico lexicalAnalyzer;
+import ParserC.lexicon.Lexicon;
+import ParserC.lexicon.ReservedWorld;
+import ParserC.lexicon.Token;
+
+public class Sintatic {
+    private Lexicon lexicalAnalyzer;
     private Token token;
 
-    public Sintatico(Lexico lexicalAnalyzer) {
+    public Sintatic(Lexicon lexicalAnalyzer) {
         this.lexicalAnalyzer = lexicalAnalyzer;
     }
 
-    public void s() throws Exception {
+    public void runSintaticAnalyzer() throws Exception {
         token = lexicalAnalyzer.nextToken();
         if(!token.getLexema().equals("int")){
             throw new RuntimeException("Iih rapaz! Cadê o tipo de retorno do main?");
@@ -32,7 +36,7 @@ public class Sintatico {
 
         this.block();
 
-        if(token.getTipo() == Token.TIPO_FIM_CODIGO){
+        if(token.getType() == Token.TYPE_FINISHED_CODE){
             System.out.println("Boa minha fera! Escreveu o código certinho, botou pra lascar!");
         } else{
             throw new RuntimeException("Lascou! Deu bronca logo perto do fim do programa :(");
@@ -64,7 +68,7 @@ public class Sintatico {
 	}
 
 	private void command() throws Exception{
-        if(token.getTipo() == Token.TIPO_IDENTIFICADOR || token.getLexema().equals("{")){
+        if(token.getType() == Token.TYPE_IDENTIFIER || token.getLexema().equals("{")){
             this.basicCommand();
         }else if(token.getLexema().equals("while")){
             this.iteration();
@@ -137,7 +141,7 @@ public class Sintatico {
 
     private boolean isReservedWorld(String world) {
 		ReservedWorld reservedWorld = new ReservedWorld(world);
-		return reservedWorld.EqualsReservedWorld();
+		return reservedWorld.equalsReservedWorld();
 	}
 
     private void declaretaionOrComand() throws Exception {
@@ -152,12 +156,12 @@ public class Sintatico {
     }
 
     private boolean isComand() {
-        return token.getTipo() == Token.TIPO_IDENTIFICADOR || token.getLexema().equals("{") ||
+        return token.getType() == Token.TYPE_IDENTIFIER || token.getLexema().equals("{") ||
         token.getLexema().equals("while") || token.getLexema().equals("if");
     }
     
     private void basicCommand() throws Exception{
-        if(token.getTipo() == Token.TIPO_IDENTIFICADOR){
+        if(token.getType() == Token.TYPE_IDENTIFIER){
             this.assignment();
         } else if (token.getLexema().equals("{")){
             this.block();
@@ -186,12 +190,12 @@ public class Sintatico {
     }
 
     private void assignment() throws Exception{
-        if(token.getTipo() != Token.TIPO_IDENTIFICADOR){
+        if(token.getType() != Token.TYPE_IDENTIFIER){
             throw new RuntimeException("Lascou! Qual é o identificador bença?");
         }
         
         token = lexicalAnalyzer.nextToken();
-        if(token.getTipo() != Token.TIPO_OPERADOR_DE_ATRIBUICAO){
+        if(token.getType() != Token.TYPE_ASSIGNMENT_OPERATOR){
             throw new RuntimeException("Lascou! Cade o operador de atribuição bença?");
         }
         
@@ -217,12 +221,12 @@ public class Sintatico {
 
     public void declarationVariables() throws Exception{
         this.Type();
-        if(token.getTipo() != Token.TIPO_IDENTIFICADOR){
+        if(token.getType() != Token.TYPE_IDENTIFIER){
             throw new RuntimeException("Cade o identificador bença?");
         }
 
         token = lexicalAnalyzer.nextToken();
-        if(token.getTipo() == Token.TIPO_OPERADOR_DE_ATRIBUICAO){
+        if(token.getType() == Token.TYPE_ASSIGNMENT_OPERATOR){
             token = lexicalAnalyzer.nextToken(); 
             if(!isValidTerm()) {
         	    throw new RuntimeException("Sim, essa expressao vai receber o que? coloca o valor bença!");
@@ -245,7 +249,7 @@ public class Sintatico {
             throw new RuntimeException("Rapaz, isso aqui nao e uma expressao aritmetica nao visse..."); 
         }
 
-        if(!(this.token.getTipo() == Token.TIPO_OPERADOR_RELACIONAL))
+        if(!(this.token.getType() == Token.TYPE_RELATIONAL_OPERATOR))
             throw new RuntimeException("Erro, relaciona ai o que foi! Ta faltando o operador relacional mermao...");
         this.token = lexicalAnalyzer.nextToken();
 
@@ -263,7 +267,7 @@ public class Sintatico {
 
     private void arithmeticExpressionDerivated() throws Exception {
         //Modified for @aquiles
-        if (this.token.getTipo() == Token.TIPO_OPERADOR_ARITMETICO) {
+        if (this.token.getType() == Token.TYPE_ARITHMETICAL_OPERATOR) {
             this.arithmeticExpressionOperator();
             this.arithmeticExpressionTerm();
             this.arithmeticExpressionDerivated();
@@ -283,10 +287,10 @@ public class Sintatico {
     }
 
     private boolean isValidTerm() {
-        return this.token.getTipo() == Token.TIPO_IDENTIFICADOR || 
-                this.token.getTipo() == Token.TIPO_INTEIRO ||
-                this.token.getTipo() == Token.TIPO_REAL ||
-                this.token.getTipo() == Token.TIPO_CHAR;
+        return this.token.getType() == Token.TYPE_IDENTIFIER || 
+                this.token.getType() == Token.TYPE_INTEGER ||
+                this.token.getType() == Token.TYPE_REAL ||
+                this.token.getType() == Token.TYPE_CHAR;
     }
 
     private void arithmeticExpressionWithParentesis() throws Exception {
@@ -300,7 +304,7 @@ public class Sintatico {
 
     private void arithmeticExpressionOperator() throws Exception {
         //Modified for @aquilesR
-        if (this.token.getTipo() == Token.TIPO_OPERADOR_ARITMETICO) {
+        if (this.token.getType() == Token.TYPE_ARITHMETICAL_OPERATOR) {
             this.token = lexicalAnalyzer.nextToken();
         } else {
             throw new RuntimeException("Ei boy, tiracao! Ta faltando um operador aritmetico (+,-,/,*) nessa expressao");

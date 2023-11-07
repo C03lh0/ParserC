@@ -1,10 +1,10 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import CompiladorL3.Token;
+import ParserC.lexicon.Token;
 
 public class Semantic {
 	private int state; // 1 - declaration, 2 - operation
@@ -83,13 +83,13 @@ public class Semantic {
 	}
 
 	private boolean isAnIdentifier(Token token) {
-		return token.getTipo() == 3;
+		return token.getType() == 3;
 	}
 
 	public boolean tokenIsAnUninitializedVariable(Token currentToken) {
 		for (SDeclarationChecker sDeclarationChecker : declarationCheckers) {
 			String name = sDeclarationChecker.getCurrentDeclarationName();
-			if (name.equals(currentToken.getLexema()) && currentSDeclarationChecker.getSemanticSubject().last3TokensIsDeclarationOrOperation[2].getTipo() < 3) {
+			if (name.equals(currentToken.getLexema()) && currentSDeclarationChecker.getSemanticSubject().last3TokensIsDeclarationOrOperation[2].getType() < 3) {
 				this.currentSDeclarationChecker = sDeclarationChecker;
 				return true;
 			}
@@ -125,7 +125,7 @@ public class Semantic {
 
 	private boolean isOperation() {
 		if(last3TokensIsDeclarationOrOperation[1] != null) {
-			return last3TokensIsDeclarationOrOperation[1].getTipo() == 5 || last3TokensIsDeclarationOrOperation[1].getTipo() == 4 ;
+			return last3TokensIsDeclarationOrOperation[1].getType() == 5 || last3TokensIsDeclarationOrOperation[1].getType() == 4 ;
 		}
 		return false;
 	}

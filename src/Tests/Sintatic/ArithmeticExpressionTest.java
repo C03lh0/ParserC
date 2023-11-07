@@ -1,8 +1,8 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
-
 import org.junit.*;
+
+import ParserC.ParserC;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class ArithmeticExpressionTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -27,8 +27,8 @@ public class ArithmeticExpressionTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -41,7 +41,7 @@ public class ArithmeticExpressionTest {
 
 //    @Test
 //    public void withoutArithmeticOperatorTest() throws Exception {
-//        CompiladorL3 compiler;
+//        ParserC parserC;
 //        String path = "codigoCompilador.txt";
 //        FileWriter file = new FileWriter(path);
 //        PrintWriter writeFile = new PrintWriter(file);
@@ -54,8 +54,8 @@ public class ArithmeticExpressionTest {
 //        String phrase = "Ei boy, tiracao! Ta faltando um operador aritmetico (+,-,/,*) nessa expressao";
 //
 //        try {
-//            compiler = new CompiladorL3();
-//            compiler.runSintatic(path);
+//            parserC = new ParserC();
+//            parserC.runSintatic(path);
 //            Assert.fail();
 //        }  catch (RuntimeException e){
 //            assertEquals(phrase, e.getMessage());
@@ -67,7 +67,7 @@ public class ArithmeticExpressionTest {
     
     @Test
     public void withoutValidTermAfterOperator() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -80,8 +80,8 @@ public class ArithmeticExpressionTest {
         String phrase = "Ta de comedia, ne pirra? Ta faltando um termo valido (id, int, float ou char) nessa expressao";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         }  catch (RuntimeException e){
@@ -94,7 +94,7 @@ public class ArithmeticExpressionTest {
 
     @Test
     public void withoutFinalParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -107,8 +107,8 @@ public class ArithmeticExpressionTest {
         String phrase = "Ai você me quebra! Fecha o parênteses perto da expressao aritmetica";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         }  catch (RuntimeException e){

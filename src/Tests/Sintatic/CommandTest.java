@@ -1,8 +1,8 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
-
 import org.junit.*;
+
+import ParserC.ParserC;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class CommandTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -27,8 +27,8 @@ public class CommandTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -42,7 +42,7 @@ public class CommandTest {
     //TA DISPARANDO ERRO DO METODO BLOCK FECHAR }
     @Test
     public void withoutIFTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -55,8 +55,8 @@ public class CommandTest {
         String phrase = "Cade a palavra reservada da condicional pra começar bença?";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){
@@ -69,7 +69,7 @@ public class CommandTest {
 
     @Test
     public void withoutInitialParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -82,8 +82,8 @@ public class CommandTest {
         String phrase = "Ei comparça! Bora, abre o parênteses do if.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){
@@ -96,7 +96,7 @@ public class CommandTest {
 
     @Test
     public void withoutFinalParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -109,8 +109,8 @@ public class CommandTest {
         String phrase = "Ei comparça! Bora, fecha o parênteses do if.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){
@@ -123,7 +123,7 @@ public class CommandTest {
 
     @Test
     public void withoutElseTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -136,8 +136,8 @@ public class CommandTest {
         String phrase = "Ei comparça, cade o ELSE do teu if?";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){
@@ -150,7 +150,7 @@ public class CommandTest {
 
     @Test
     public void withoutInterrogationTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -163,8 +163,8 @@ public class CommandTest {
         String phrase = "Ei comparça, teu else acaba não é? Coloca '?' depois de '}'";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){

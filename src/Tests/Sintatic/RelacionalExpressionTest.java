@@ -1,8 +1,8 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
-
 import org.junit.*;
+
+import ParserC.ParserC;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class RelacionalExpressionTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -30,8 +30,8 @@ public class RelacionalExpressionTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -45,7 +45,7 @@ public class RelacionalExpressionTest {
 
     @Test
     public void withoutRelacionalOperatorTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -61,8 +61,8 @@ public class RelacionalExpressionTest {
         String phrase = "Erro, relaciona ai o que foi! Ta faltando o operador relacional mermao...";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         }  catch (RuntimeException e){

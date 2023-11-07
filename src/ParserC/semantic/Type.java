@@ -1,9 +1,6 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import CompiladorL3.Token;
+import ParserC.lexicon.Token;
 
 public class Type {
 		private int type;

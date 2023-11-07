@@ -1,35 +1,35 @@
-package CompiladorL3;
+package ParserC.lexicon;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class Lexico {
-	private char[] conteudo;
-	private int indiceConteudo;
+public class Lexicon {
+	private char[] content;
+	private int contentIndex;
 
-	public Lexico(String caminhoCodigoFonte) {
+	public Lexicon(String sourceCodePath) {
 		try {
-			String conteudoStr;
-			conteudoStr = new String(Files.readAllBytes(Paths.get(caminhoCodigoFonte)));
-			this.conteudo = conteudoStr.toCharArray();
-			this.indiceConteudo = 0;
+			String contentStr;
+			contentStr = new String(Files.readAllBytes(Paths.get(sourceCodePath)));
+			this.content = contentStr.toCharArray();
+			this.contentIndex = 0;
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	private char nextChar() {
-		return this.conteudo[this.indiceConteudo++];
+		return this.content[this.contentIndex++];
 	}
 
 	private boolean hasNextChar() {
-		return indiceConteudo < this.conteudo.length;
+		return contentIndex < this.content.length;
 	}
 
 	private void backIndex() {
-		this.indiceConteudo--;
+		this.contentIndex--;
 	}
 
 	private boolean isLowerCaseLetter(char c) {
@@ -60,14 +60,14 @@ public class Lexico {
 					lexema.append(currentChar);
 					//Modificado por @C03lh0
 					if(isReservedWorld(lexema.toString())) {
-						return new Token(lexema.toString(), Token.TIPO_PALAVRA_RESERVADA);
+						return new Token(lexema.toString(), Token.TYPE_RESERVED_WORLD);
 					} else if (!this.hasNextChar()) {
-						return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+						return new Token(lexema.toString(), Token.TYPE_IDENTIFIER);
 					}
 					state = 1;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+					return new Token(lexema.toString(), Token.TYPE_IDENTIFIER);
 				}
 				break; 
 			case 2:
@@ -79,7 +79,7 @@ public class Lexico {
 					state = 3;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_INTEIRO);
+					return new Token(lexema.toString(), Token.TYPE_INTEGER);
 				}
 				break;
 			case 3:
@@ -96,19 +96,19 @@ public class Lexico {
 					state = 4;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_REAL);
+					return new Token(lexema.toString(), Token.TYPE_REAL);
 				}
 				break;
 			case 5:
 				this.backIndex();
-				return new Token(lexema.toString(), Token.TIPO_CARACTER_ESPECIAL);
+				return new Token(lexema.toString(), Token.TYPE_ESPECIAL_CHARACTER);
 			case 6:
 				if (isAssignmentOperator(currentChar)) {
 					this.backIndex();
 					state = 9;
 				} else  {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_DE_ATRIBUICAO);
+					return new Token(lexema.toString(), Token.TYPE_ASSIGNMENT_OPERATOR);
 				}
 				break;
 			case 7:		
@@ -116,7 +116,7 @@ public class Lexico {
 					state = 7;
 					if (lexema.length() == 3) {
 						lexema.append(currentChar);
-						return new Token(lexema.toString(), Token.TIPO_CHAR);
+						return new Token(lexema.toString(), Token.TYPE_CHAR);
 					}
 				} else {
 					throw new RuntimeException("Erro: char invalido \"" + lexema.toString() + "\"");
@@ -124,16 +124,16 @@ public class Lexico {
 				break;
 			case 9:
 				if (!isPartOfAnRelationalOperator(currentChar, state, lexema) || !this.hasNextChar() || currentChar == '\n')
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+					return new Token(lexema.toString(), Token.TYPE_RELATIONAL_OPERATOR);
 				break;
 			case 10:
 				break;
 			case 11:
 				if(currentChar == '\n' || !isAArithmeticOperator(currentChar)){
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+					return new Token(lexema.toString(), Token.TYPE_ARITHMETICAL_OPERATOR);
 				} else if (isADoublyArithmeticOperator(currentChar, lexema)) {
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+					return new Token(lexema.toString(), Token.TYPE_ARITHMETICAL_OPERATOR);
 				//Alterado por @C03lh0	Matheus's Token (++ or +++ | -- or ---)
 				} else if (this.isAArithmeticOperator(currentChar)){
 					if(isArithmeticOperatorEquals(currentChar, lexema) && counter<2) {
@@ -146,7 +146,7 @@ public class Lexico {
 				} 
 				break;
 			case 99:
-				return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO);
+				return new Token(lexema.toString(), Token.TYPE_FINISHED_CODE);
 				
 			}
 		}
@@ -246,17 +246,17 @@ public class Lexico {
 		return false;
 	}
 	
-	public int getIndiceConteudo() {
-		return indiceConteudo;
+	public int getContentIndex() {
+		return contentIndex;
 	}
 
-	public void setIndiceConteudo(int indiceConteudo) {
-		this.indiceConteudo = indiceConteudo;
+	public void setContentIndex(int contentIndex) {
+		this.contentIndex = contentIndex;
 	}
 	
 	private boolean isReservedWorld(String world) {
 		ReservedWorld reservedWorld = new ReservedWorld(world);
-		return reservedWorld.EqualsReservedWorld();
+		return reservedWorld.equalsReservedWorld();
 	}
 
 	private boolean isADoublyArithmeticOperator(char c, StringBuffer lex){
@@ -273,19 +273,19 @@ public class Lexico {
 	
 	private Token returnCurrentToken(char currentChar, StringBuffer lexema) {
 		if (isLetterOrUnderscore(currentChar)) {
-			return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+			return new Token(lexema.toString(), Token.TYPE_IDENTIFIER);
 	   } else if (this.isDigit(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_INTEIRO);
+		   return new Token(lexema.toString(), Token.TYPE_INTEGER);
 	   } else if (isASpecialCharacter(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_CARACTER_ESPECIAL);
+		   return new Token(lexema.toString(), Token.TYPE_ESPECIAL_CHARACTER);
 	   } else if (currentChar == '$') {
-		   return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO);
+		   return new Token(lexema.toString(), Token.TYPE_FINISHED_CODE);
 	   } else if (isAssignmentOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_DE_ATRIBUICAO);
+		   return new Token(lexema.toString(), Token.TYPE_ASSIGNMENT_OPERATOR);
 	   } else if (isRelationalOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+		   return new Token(lexema.toString(), Token.TYPE_RELATIONAL_OPERATOR);
 	   } else if (isAArithmeticOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+		   return new Token(lexema.toString(), Token.TYPE_ARITHMETICAL_OPERATOR);
 	   }  else {
 		   lexema.append(currentChar);
 		   throw new RuntimeException("Erro: token invalido \"" + lexema.toString() + "\"");

@@ -1,8 +1,8 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
-
 import org.junit.*;
+
+import ParserC.ParserC;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class ProgramTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -25,8 +25,8 @@ public class ProgramTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -39,7 +39,7 @@ public class ProgramTest {
 
     @Test
     public void withoutReturnTypeTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -50,8 +50,8 @@ public class ProgramTest {
         String phrase = "Iih rapaz! Cadê o tipo de retorno do main?";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
 
             Assert.fail();
         } catch (RuntimeException e){
@@ -64,7 +64,7 @@ public class ProgramTest {
 
     @Test
     public void withoutMainTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -75,8 +75,8 @@ public class ProgramTest {
         String phrase = "Iih rapaz! Cadê o main?";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
 
             Assert.fail();
         } catch (RuntimeException e) {
@@ -89,7 +89,7 @@ public class ProgramTest {
 
     @Test
     public void withoutInitialParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -100,8 +100,8 @@ public class ProgramTest {
         String phrase = "Ai você me quebra! Abre o parênteses do main.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
 
             Assert.fail();
         }  catch (RuntimeException e){
@@ -114,7 +114,7 @@ public class ProgramTest {
 
     @Test
     public void withoutFinalParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -125,8 +125,8 @@ public class ProgramTest {
         String phrase = "Ai você me quebra! Abre o parênteses do main.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
 
             Assert.fail();
         }  catch (RuntimeException e){

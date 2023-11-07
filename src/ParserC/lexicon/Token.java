@@ -1,37 +1,37 @@
-package CompiladorL3;
+package ParserC.lexicon;
 
 public class Token {
-    public static int TIPO_INTEIRO = 0;
-    public static int TIPO_REAL = 1;
-    public static int TIPO_CHAR = 2;
-    public static int TIPO_IDENTIFICADOR = 3;
-    public static int TIPO_OPERADOR_RELACIONAL = 4;
-    public static int TIPO_OPERADOR_ARITMETICO = 5;
-    public static int TIPO_CARACTER_ESPECIAL = 6;
-    public static int TIPO_PALAVRA_RESERVADA = 7;
-    public static int TIPO_OPERADOR_DE_ATRIBUICAO = 8;
-    public static int TIPO_FIM_CODIGO = 99;
+    public static int TYPE_INTEGER = 0;
+    public static int TYPE_REAL = 1;
+    public static int TYPE_CHAR = 2;
+    public static int TYPE_IDENTIFIER = 3;
+    public static int TYPE_RELATIONAL_OPERATOR = 4;
+    public static int TYPE_ARITHMETICAL_OPERATOR = 5;
+    public static int TYPE_ESPECIAL_CHARACTER = 6;
+    public static int TYPE_RESERVED_WORLD = 7;
+    public static int TYPE_ASSIGNMENT_OPERATOR = 8;
+    public static int TYPE_FINISHED_CODE = 99;
     
-    private int tipo; //tipo do token
+    private int type; //tipo do token
     private String lexema; //conteúdo do token
     
-    public Token(String lexema, int tipo){
+    public Token(String lexema, int type){
         this.lexema = lexema;
-        this.tipo = tipo;
+        this.type = type;
     }
     
     public String getLexema(){
         return this.lexema;
     }
     
-    public int getTipo(){
-        return this.tipo;
+    public int getType(){
+        return this.type;
     }
     
     @Override
     public String toString()
     {
-        switch(this.tipo){
+        switch(this.type){
             case 0:
                 return this.lexema + " - INTEIRO" ;
             case 1:

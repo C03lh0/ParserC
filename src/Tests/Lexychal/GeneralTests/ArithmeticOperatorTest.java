@@ -1,8 +1,9 @@
 package Tests.Lexychal.GeneralTests;
 
-import CompiladorL3.CompiladorL3;
-import CompiladorL3.Lexico;
 import org.junit.Test;
+
+import ParserC.ParserC;
+import ParserC.lexicon.Lexicon;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,8 +15,8 @@ public class ArithmeticOperatorTest {
 
     @Test
     public void OnlyArithmeticOperator() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -27,14 +28,14 @@ public class ArithmeticOperatorTest {
 
         file.close();
 
-        compiler = new CompiladorL3();
-        compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        parserC = new ParserC();
+        parserC.runLexychal(path);
+        lex = parserC.getLexicon();
 
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
 
         File delete = new File(path);
         delete.delete();
@@ -43,8 +44,8 @@ public class ArithmeticOperatorTest {
 
     @Test
     public void OtherTokensWithArithmeticOperator() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -58,16 +59,16 @@ public class ArithmeticOperatorTest {
 
         file.close();
 
-        compiler = new CompiladorL3();
-        compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        parserC = new ParserC();
+        parserC.runLexychal(path);
+        lex = parserC.getLexicon();
 
-        assertEquals(1, lex.nextToken().getTipo());
-        assertEquals(3, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
-        assertEquals(5, lex.nextToken().getTipo());
+        assertEquals(1, lex.nextToken().getType());
+        assertEquals(3, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
+        assertEquals(5, lex.nextToken().getType());
 
         File delete = new File(path);
         delete.delete();

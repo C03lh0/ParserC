@@ -1,4 +1,4 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
 import java.util.ArrayList;
 import java.util.List;

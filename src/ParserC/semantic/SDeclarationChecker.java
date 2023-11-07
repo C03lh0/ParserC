@@ -1,9 +1,9 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CompiladorL3.Token;
+import ParserC.lexicon.Token;
 
 public class SDeclarationChecker  {
 	private Scope currentScope;
@@ -94,7 +94,7 @@ public class SDeclarationChecker  {
 
 	private boolean checkOperationsBetweenVariables(Token currentPart) {
 
-		if(currentPart.getTipo() == 3) {
+		if(currentPart.getType() == 3) {
 			Variable compositionVar = currentScope.getVariable(currentPart.getLexema());
 
 			if (compositionVar == null) {
@@ -165,23 +165,23 @@ public class SDeclarationChecker  {
 	}
 
 	private boolean isValueInt(Token currentPart) {
-		return currentPart.getTipo() == 0;
+		return currentPart.getType() == 0;
 	}
 
 	public boolean isAnArithmeticOperator(Token currentPart) {
-		return currentPart.getTipo() == 5;
+		return currentPart.getType() == 5;
 	}
 	private boolean isAnArithmeticOperator(char c){
 		return c == '+' || c == '-' || c == '*' || c == '/';
 	}
 	private boolean isValueReal(Token currentPart) {
 
-		return currentPart.getTipo() == 1;
+		return currentPart.getType() == 1;
 	}
 
 	private boolean isValueChar(Token currentPart) {
 
-		return currentPart.getTipo() == 2;
+		return currentPart.getType() == 2;
 	}
 
 	private boolean isADeclarationTerminator(Token currentPart) throws Exception {
@@ -189,7 +189,7 @@ public class SDeclarationChecker  {
 	}
 
 	private boolean isAnAssignment(Token currentPart) {
-		return currentPart.getTipo() == 8;
+		return currentPart.getType() == 8;
 	}
 
 	private boolean isAValidIdentifier(Token currentPart) throws Exception {
@@ -197,11 +197,11 @@ public class SDeclarationChecker  {
 			throw new Exception(
 					"Variable already exists: '" + currentPart.getLexema() + "' <-");
 		}
-		return currentPart.getTipo() == 3;
+		return currentPart.getType() == 3;
 	}
 	
 	private boolean isAnIdentifier(Token currentPart) throws Exception {
-		return currentPart.getTipo() == 3;
+		return currentPart.getType() == 3;
 	}
 
 	private boolean isVariableType(Token currentPart) {

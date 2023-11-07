@@ -1,8 +1,8 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
-
 import org.junit.*;
+
+import ParserC.ParserC;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class BlockTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -25,8 +25,8 @@ public class BlockTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -39,7 +39,7 @@ public class BlockTest {
 
     @Test
     public void withoutInitialKeyTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -50,8 +50,8 @@ public class BlockTest {
         String phrase = "Como você é burro cara! Abre as chaves do método.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){
@@ -64,7 +64,7 @@ public class BlockTest {
 
     @Test
     public void withoutFinalKeyTest() throws Exception {
-        CompiladorL3 compiler;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -75,8 +75,8 @@ public class BlockTest {
         String phrase = "Como você é burro cara! Fecha as chaves do método.";
 
         try {
-            compiler = new CompiladorL3();
-            compiler.runSintatic(path);
+            parserC = new ParserC();
+            parserC.runSintatic(path);
             
             Assert.fail();
         } catch (RuntimeException e){

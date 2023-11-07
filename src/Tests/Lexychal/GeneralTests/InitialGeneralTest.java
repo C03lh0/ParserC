@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 
 import org.junit.Test;
 
-import CompiladorL3.CompiladorL3;
-import CompiladorL3.Lexico;
+import ParserC.ParserC;
+import ParserC.lexicon.Lexicon;
 
 public class InitialGeneralTest {
 
@@ -34,37 +34,37 @@ public class InitialGeneralTest {
 		
 		file.close();
 		
-		CompiladorL3 c = new CompiladorL3();
+		ParserC c = new ParserC();
 		c.runLexychal(path);
-		Lexico lex = c.getLexico();
+		Lexicon lex = c.getLexicon();
 		
 		
-		assertEquals(3, lex.nextToken().getTipo());
-		assertEquals(3, lex.nextToken().getTipo());
-		assertEquals(3, lex.nextToken().getTipo());
+		assertEquals(3, lex.nextToken().getType());
+		assertEquals(3, lex.nextToken().getType());
+		assertEquals(3, lex.nextToken().getType());
 
-		assertEquals(0, lex.nextToken().getTipo());
-		assertEquals(0, lex.nextToken().getTipo());
+		assertEquals(0, lex.nextToken().getType());
+		assertEquals(0, lex.nextToken().getType());
 
-		assertEquals(1, lex.nextToken().getTipo());
-		assertEquals(1, lex.nextToken().getTipo());
+		assertEquals(1, lex.nextToken().getType());
+		assertEquals(1, lex.nextToken().getType());
 
-		assertEquals(6, lex.nextToken().getTipo());
-		assertEquals(6, lex.nextToken().getTipo());
-		assertEquals(6, lex.nextToken().getTipo());
-		assertEquals(6, lex.nextToken().getTipo());
-		assertEquals(6, lex.nextToken().getTipo());
-		assertEquals(6, lex.nextToken().getTipo());
+		assertEquals(6, lex.nextToken().getType());
+		assertEquals(6, lex.nextToken().getType());
+		assertEquals(6, lex.nextToken().getType());
+		assertEquals(6, lex.nextToken().getType());
+		assertEquals(6, lex.nextToken().getType());
+		assertEquals(6, lex.nextToken().getType());
 
-		assertEquals(0, lex.nextToken().getTipo());
+		assertEquals(0, lex.nextToken().getType());
 
-		assertEquals(3, lex.nextToken().getTipo());
+		assertEquals(3, lex.nextToken().getType());
 
-		assertEquals(0, lex.nextToken().getTipo());
+		assertEquals(0, lex.nextToken().getType());
 
-		assertEquals(3, lex.nextToken().getTipo()); 
+		assertEquals(3, lex.nextToken().getType()); 
 
-		assertEquals(99, lex.nextToken().getTipo());
+		assertEquals(99, lex.nextToken().getType());
 		
 
 		File delete = new File(path);
@@ -73,8 +73,8 @@ public class InitialGeneralTest {
 
 	@Test
     public void AssignmentExpression() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -84,15 +84,15 @@ public class InitialGeneralTest {
 
         file.close();
 
-        compiler = new CompiladorL3();
-        compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        parserC = new ParserC();
+        parserC.runLexychal(path);
+        lex = parserC.getLexicon();
 
-        assertEquals(7, lex.nextToken().getTipo());
-        assertEquals(3, lex.nextToken().getTipo());
-        assertEquals(8, lex.nextToken().getTipo());
-        assertEquals(2, lex.nextToken().getTipo());
-        assertEquals(6, lex.nextToken().getTipo());
+        assertEquals(7, lex.nextToken().getType());
+        assertEquals(3, lex.nextToken().getType());
+        assertEquals(8, lex.nextToken().getType());
+        assertEquals(2, lex.nextToken().getType());
+        assertEquals(6, lex.nextToken().getType());
 
         File delete = new File(path);
         delete.delete();

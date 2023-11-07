@@ -1,4 +1,4 @@
-package CompiladorL3;
+package ParserC.lexicon;
 
 public class ReservedWorld {
 	private String reservedWorld;
@@ -17,8 +17,7 @@ public class ReservedWorld {
 		this.reservedWorld = reservedWorld;
 	}
 	
-	
-	public boolean EqualsReservedWorld() {
+	public boolean equalsReservedWorld() {
 		
 		return this.reservedWorld.equals(this.RESERVEDWORLD_MAIN) ||
 				this.reservedWorld.equals(this.RESERVEDWORLD_IF) || 

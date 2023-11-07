@@ -1,4 +1,4 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
 public class Variable {
 	private String name;

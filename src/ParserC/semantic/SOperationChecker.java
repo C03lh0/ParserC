@@ -1,9 +1,9 @@
-package CompiladorL3.semantic;
+package ParserC.semantic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CompiladorL3.Token;
+import ParserC.lexicon.Token;
 
 public class SOperationChecker {
 	private Semantic semanticSubject;
@@ -29,7 +29,7 @@ public class SOperationChecker {
 		
 		/*
 		
-		if (isAnIdentifier(currentToken) && !(operationParts.get(0).getTipo() == currentToken.getTipo())) {
+		if (isAnIdentifier(currentToken) && !(operationParts.get(0).getType() == currentToken.getType())) {
 			throw new Exception("Operators have differents types in: '" + currentOperationPartsToString() + "'");
 		} else if (!correctLogicalSequence(currentToken)) {
 			throw new Exception("Sequentially repeated tokens type: '" + currentOperationPartsToString() + "'");
@@ -70,15 +70,15 @@ public class SOperationChecker {
 	}
 
 	private boolean isAnIdentifier(Token currentPart) {
-		return currentPart.getTipo() == 3;
+		return currentPart.getType() == 3;
 	}
 
 	private boolean isAnOperator(Token currentPart) {
-		return currentPart.getTipo() == 4 || currentPart.getTipo() == 5;
+		return currentPart.getType() == 4 || currentPart.getType() == 5;
 	}
 
 	private boolean correctLogicalSequence(Token currentPart) {
-		return operationParts.get(operationParts.size() - 1).getTipo() != currentPart.getTipo();
+		return operationParts.get(operationParts.size() - 1).getType() != currentPart.getType();
 	}
 
 	private boolean isAnOperationTerminator(Token currentPart) throws Exception {

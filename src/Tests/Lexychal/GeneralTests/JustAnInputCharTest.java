@@ -8,15 +8,15 @@ import java.io.PrintWriter;
 
 import org.junit.Test;
 
-import CompiladorL3.CompiladorL3;
-import CompiladorL3.Lexico;
+import ParserC.ParserC;
+import ParserC.lexicon.Lexicon;
 
 public class JustAnInputCharTest {
 	
     @Test
     public void JustAnIntegerChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -26,19 +26,19 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(0, lex.nextToken().getTipo());
+        assertEquals(0, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
     }
     @Test
     public void JustAnArithmeticOperatorChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -48,19 +48,19 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(5, lex.nextToken().getTipo());
+        assertEquals(5, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
     }
     @Test
     public void JustAnIdentifierOperatorChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -70,19 +70,19 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(3, lex.nextToken().getTipo());
+        assertEquals(3, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
     }
     @Test
     public void JustASpecialCharacterChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -92,19 +92,19 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(6, lex.nextToken().getTipo());
+        assertEquals(6, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
     }
     @Test
     public void JustARelationalOperatorChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -114,11 +114,11 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(4, lex.nextToken().getTipo());
+        assertEquals(4, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
@@ -126,8 +126,8 @@ public class JustAnInputCharTest {
 
     @Test
     public void JustAAssignmentOperatorChar() throws Exception {
-        Lexico lex;
-        CompiladorL3 compiler;
+        Lexicon lex;
+        ParserC parserC;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
 		PrintWriter writeFile = new PrintWriter(file);
@@ -137,11 +137,11 @@ public class JustAnInputCharTest {
         
         file.close();
 
-        compiler = new CompiladorL3();
-		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+        parserC = new ParserC();
+		parserC.runLexychal(path);
+		lex = parserC.getLexicon();
 
-        assertEquals(8, lex.nextToken().getTipo());
+        assertEquals(8, lex.nextToken().getType());
 
         File delete = new File(path);
 		delete.delete();		
