@@ -65,7 +65,7 @@ public class Parser {
 
     private void command() throws Exception {
         if (token.getType() == Token.IDENTIFIER_TYPE || token.getLexeme().equals("{")) {
-            this.basicCommand();
+            this.parseBasicCommand();
         } else if (token.getLexeme().equals("while")) {
             this.parseWhileLoop();
         } else if (token.getLexeme().equals("if")) {
@@ -85,7 +85,7 @@ public class Parser {
                 throw new RuntimeException("Ei comparça! Bora, abre o '{' do if.");
             }
 
-            if (!isCommand()) {
+            if (!isNextTokenCommand()) {
                 throw new RuntimeException(
                         "Poxa comparça! Estava esperando você declara algum comando pertinho de " + token.getLexeme());
             }
@@ -100,7 +100,7 @@ public class Parser {
                 throw new RuntimeException("Ei comparça! Bora, abre o '{' do else.");
             }
 
-            if (!isCommand()) {
+            if (!isNextTokenCommand()) {
                 throw new RuntimeException(
                         "Poxa comparça! Estava esperando você declara algum comando pertinho de " + token.getLexeme());
             }
@@ -120,7 +120,7 @@ public class Parser {
     private void goToDeclarationOrCommand() throws Exception {
         if (token.getLexeme().equals("int") || token.getLexeme().equals("float") || token.getLexeme().equals("char")
                 || isReservedWorld(token.getLexeme()) ||
-                token.getLexeme().equals("{") || isCommand()) {
+                token.getLexeme().equals("{") || isNextTokenCommand()) {
 
             if (token.getLexeme().equals("return")) {
                 token = lexicalAnalyzer.nextToken();
@@ -134,7 +134,7 @@ public class Parser {
                 return;
             }
 
-            this.declarationOrCommand();
+            this.parsedeclarationOrCommand();
             this.goToDeclarationOrCommand();
         }
     }
@@ -144,11 +144,11 @@ public class Parser {
         return reservedWorld.EqualsReservedWorld();
     }
 
-    private void declarationOrCommand() throws Exception {
+    private void parsedeclarationOrCommand() throws Exception {
         if (token.getLexeme().equals("int") || token.getLexeme().equals("float") ||
                 token.getLexeme().equals("char")) {
             this.declarationVariables();
-        } else if (isCommand()) {
+        } else if (isNextTokenCommand()) {
             this.command();
         } else {
             throw new RuntimeException(
@@ -156,12 +156,12 @@ public class Parser {
         }
     }
 
-    private boolean isCommand() {
+    private boolean isNextTokenCommand() {
         return token.getType() == Token.IDENTIFIER_TYPE || token.getLexeme().equals("{") ||
                 token.getLexeme().equals("while") || token.getLexeme().equals("if");
     }
 
-    private void basicCommand() throws Exception {
+    private void parseBasicCommand() throws Exception {
         if (token.getType() == Token.IDENTIFIER_TYPE) {
             this.assignment();
         } else if (token.getLexeme().equals("{")) {

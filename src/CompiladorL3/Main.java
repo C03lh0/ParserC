@@ -7,7 +7,7 @@ public class Main {
 		OlimpoCompiler c = new OlimpoCompiler();
 		try {
 			c.runLexychal(path);
-			c.runSintatic(path);
+			c.runSyntax(path);
 			c.runSemantic(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

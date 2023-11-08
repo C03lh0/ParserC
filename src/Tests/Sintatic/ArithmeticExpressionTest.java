@@ -28,7 +28,7 @@ public class ArithmeticExpressionTest {
 
         try {
             compiler = new OlimpoCompiler();
-            compiler.runSintatic(path);
+            compiler.runSyntax(path);
             
             Assert.assertTrue(true);
         } catch (RuntimeException e){
@@ -81,7 +81,7 @@ public class ArithmeticExpressionTest {
 
         try {
             compiler = new OlimpoCompiler();
-            compiler.runSintatic(path);
+            compiler.runSyntax(path);
             
             Assert.fail();
         }  catch (RuntimeException e){
@@ -108,7 +108,7 @@ public class ArithmeticExpressionTest {
 
         try {
             compiler = new OlimpoCompiler();
-            compiler.runSintatic(path);
+            compiler.runSyntax(path);
             
             Assert.fail();
         }  catch (RuntimeException e){

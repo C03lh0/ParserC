@@ -4,59 +4,59 @@ import CompiladorL3.semantic.Semantic;
 
 public class OlimpoCompiler {
 	
-	private Lexical lexico;
-	private Parser sintatico;
-    private Semantic semantic;
+	private Lexical lexicalAnalyzer;
+	private Parser syntaxAnalyzer;
+    private Semantic semanticAnalyzer;
     
     public void runSemantic(String codeFilePath) throws Exception {
-		this.lexico = new Lexical(codeFilePath);
-		this.semantic = new Semantic();
+		this.lexicalAnalyzer = new Lexical(codeFilePath);
+		this.semanticAnalyzer = new Semantic();
         
-        Token token = this.lexico.nextToken();
-        token = this.lexico.nextToken();
-		token = this.lexico.nextToken();
+        Token token = this.lexicalAnalyzer.nextToken();
+        token = this.lexicalAnalyzer.nextToken();
+		token = this.lexicalAnalyzer.nextToken();
 		do {
 			if (token.getType() != Token.END_CODE_TYPE)
-				semanticAnalize(token);
+				analyzeSemantic(token);
 			
 			//System.out.println(token.toString());
-			token = this.lexico.nextToken();
+			token = this.lexicalAnalyzer.nextToken();
 		} while (token != null);
 		
-		this.lexico.setIndiceConteudo(0);
+		this.lexicalAnalyzer.setContentIndex(0);
 	}
     
-    public void runLexychal(String codeFilePath) throws Exception {
-    	this.lexico = new Lexical(codeFilePath);
+    public void runLexical(String codeFilePath) throws Exception {
+    	this.lexicalAnalyzer = new Lexical(codeFilePath);
   
         Token t = null;
-        while((t = this.lexico.nextToken()) != null){
+        while((t = this.lexicalAnalyzer.nextToken()) != null){
             System.out.println(t.toString());
         }
-        this.lexico.setIndiceConteudo(0);
+        this.lexicalAnalyzer.setContentIndex(0);
     }
     
-    public void runSintatic(String codeFilePath) throws Exception {
-    	this.lexico = new Lexical(codeFilePath);
-		Parser sintatico = new Parser(lexico);
+    public void runSyntax(String codeFilePath) throws Exception {
+    	this.lexicalAnalyzer = new Lexical(codeFilePath);
+		Parser sintatico = new Parser(lexicalAnalyzer);
 		sintatico.s();
-		this.lexico.setIndiceConteudo(0);
+		this.lexicalAnalyzer.setContentIndex(0);
     }
 
-	private void semanticAnalize(Token token) throws Exception {
+	private void analyzeSemantic(Token token) throws Exception {
 		if((token.getType() != 7 && !token.getLexeme().equals("(") &&
 				!token.getLexeme().equals(")")) || token.getLexeme().equals("int") ||
 				token.getLexeme().equals("char") || token.getLexeme().equals("float")){
-			this.semantic.runSemantic(token);
+			this.semanticAnalyzer.runSemantic(token);
 		}
 	}
     
-    public Lexical getLexico() {
-		return this.lexico;
+    public Lexical getLexicalAnalyzer() {
+		return this.lexicalAnalyzer;
 	}
 
-    public Parser getSintatico() {
-        return this.sintatico;
+    public Parser getSyntaxAnalyzer() {
+        return this.syntaxAnalyzer;
     }
 
 }

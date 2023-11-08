@@ -29,7 +29,7 @@ public class ArithmeticOperatorTest {
 
         compiler = new OlimpoCompiler();
         compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        lex = compiler.getLexicalAnalyzer();
 
         assertEquals(5, lex.nextToken().getType());
         assertEquals(5, lex.nextToken().getType());
@@ -60,7 +60,7 @@ public class ArithmeticOperatorTest {
 
         compiler = new OlimpoCompiler();
         compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        lex = compiler.getLexicalAnalyzer();
 
         assertEquals(1, lex.nextToken().getType());
         assertEquals(3, lex.nextToken().getType());

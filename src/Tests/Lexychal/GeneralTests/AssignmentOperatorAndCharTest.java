@@ -29,7 +29,7 @@ public class AssignmentOperatorAndCharTest {
 		try {
 			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexical lex = c.getLexico();
+			Lexical lex = c.getLexicalAnalyzer();
 			
 			assertEquals(2, lex.nextToken().getType());
 			assertEquals(2, lex.nextToken().getType());
@@ -57,7 +57,7 @@ public class AssignmentOperatorAndCharTest {
 		try {
 			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexical lex = c.getLexico();
+			Lexical lex = c.getLexicalAnalyzer();
 			
 			assertEquals(2, lex.nextToken().getType());
 			assertEquals(2, lex.nextToken().getType());
@@ -87,7 +87,7 @@ public class AssignmentOperatorAndCharTest {
 		try {
 			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexical lex = c.getLexico();
+			Lexical lex = c.getLexicalAnalyzer();
 			
 			assertEquals(4, lex.nextToken().getType());
 			assertEquals(8, lex.nextToken().getType());
@@ -118,7 +118,7 @@ public class AssignmentOperatorAndCharTest {
 		try {
 			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexical lex = c.getLexico();
+			Lexical lex = c.getLexicalAnalyzer();
 			
 			assertEquals(3, lex.nextToken().getType());
 			assertEquals(8, lex.nextToken().getType());

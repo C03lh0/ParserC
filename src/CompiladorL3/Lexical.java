@@ -6,30 +6,30 @@ import java.nio.file.Paths;
 
 
 public class Lexical {
-	private char[] conteudo;
-	private int indiceConteudo;
+	private char[] content;
+	private int contentIndex;
 
-	public Lexical(String caminhoCodigoFonte) {
+	public Lexical(String sourceCodePath) {
 		try {
-			String conteudoStr;
-			conteudoStr = new String(Files.readAllBytes(Paths.get(caminhoCodigoFonte)));
-			this.conteudo = conteudoStr.toCharArray();
-			this.indiceConteudo = 0;
+			String stringContent;
+			stringContent = new String(Files.readAllBytes(Paths.get(sourceCodePath)));
+			this.content = stringContent.toCharArray();
+			this.contentIndex = 0;
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	private char nextChar() {
-		return this.conteudo[this.indiceConteudo++];
+		return this.content[this.contentIndex++];
 	}
 
 	private boolean hasNextChar() {
-		return indiceConteudo < this.conteudo.length;
+		return contentIndex < this.content.length;
 	}
 
 	private void backIndex() {
-		this.indiceConteudo--;
+		this.contentIndex--;
 	}
 
 	private boolean isLowerCaseLetter(char c) {
@@ -246,12 +246,12 @@ public class Lexical {
 		return false;
 	}
 	
-	public int getIndiceConteudo() {
-		return indiceConteudo;
+	public int getContentIndex() {
+		return contentIndex;
 	}
 
-	public void setIndiceConteudo(int indiceConteudo) {
-		this.indiceConteudo = indiceConteudo;
+	public void setContentIndex(int indiceConteudo) {
+		this.contentIndex = indiceConteudo;
 	}
 	
 	private boolean isReservedWorld(String world) {

@@ -28,7 +28,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(0, lex.nextToken().getType());
 
@@ -50,7 +50,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(5, lex.nextToken().getType());
 
@@ -72,7 +72,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(3, lex.nextToken().getType());
 
@@ -94,7 +94,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(6, lex.nextToken().getType());
 
@@ -116,7 +116,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(4, lex.nextToken().getType());
 
@@ -139,7 +139,7 @@ public class JustAnInputCharTest {
 
         compiler = new OlimpoCompiler();
 		compiler.runLexychal(path);
-		lex = compiler.getLexico();
+		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(8, lex.nextToken().getType());
 

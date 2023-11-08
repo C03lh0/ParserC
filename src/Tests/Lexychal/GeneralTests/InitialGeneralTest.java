@@ -36,7 +36,7 @@ public class InitialGeneralTest {
 		
 		OlimpoCompiler c = new OlimpoCompiler();
 		c.runLexychal(path);
-		Lexical lex = c.getLexico();
+		Lexical lex = c.getLexicalAnalyzer();
 		
 		
 		assertEquals(3, lex.nextToken().getType());
@@ -86,7 +86,7 @@ public class InitialGeneralTest {
 
         compiler = new OlimpoCompiler();
         compiler.runLexychal(path);
-        lex = compiler.getLexico();
+        lex = compiler.getLexicalAnalyzer();
 
         assertEquals(7, lex.nextToken().getType());
         assertEquals(3, lex.nextToken().getType());
