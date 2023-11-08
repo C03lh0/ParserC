@@ -9,13 +9,13 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import CompiladorL3.OlimpoCompiler;
-import CompiladorL3.Lexer;
+import CompiladorL3.Lexical;
 
 
 public class RelationalOperatorTest {
     @Test
     public void OnlyRelationalOperators() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -47,7 +47,7 @@ public class RelationalOperatorTest {
 
 	@Test
     public void OtherTokensWithRelationalOperators() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -78,7 +78,7 @@ public class RelationalOperatorTest {
     }
 	@Test
     public void LastTokenHasSpace() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);

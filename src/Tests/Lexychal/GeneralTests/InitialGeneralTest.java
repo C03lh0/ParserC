@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import CompiladorL3.OlimpoCompiler;
-import CompiladorL3.Lexer;
+import CompiladorL3.Lexical;
 
 public class InitialGeneralTest {
 
@@ -36,7 +36,7 @@ public class InitialGeneralTest {
 		
 		OlimpoCompiler c = new OlimpoCompiler();
 		c.runLexychal(path);
-		Lexer lex = c.getLexico();
+		Lexical lex = c.getLexico();
 		
 		
 		assertEquals(3, lex.nextToken().getType());
@@ -73,7 +73,7 @@ public class InitialGeneralTest {
 
 	@Test
     public void AssignmentExpression() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);

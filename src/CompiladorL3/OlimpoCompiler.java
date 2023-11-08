@@ -4,12 +4,12 @@ import CompiladorL3.semantic.Semantic;
 
 public class OlimpoCompiler {
 	
-	private Lexer lexico;
+	private Lexical lexico;
 	private Parser sintatico;
     private Semantic semantic;
     
     public void runSemantic(String codeFilePath) throws Exception {
-		this.lexico = new Lexer(codeFilePath);
+		this.lexico = new Lexical(codeFilePath);
 		this.semantic = new Semantic();
         
         Token token = this.lexico.nextToken();
@@ -27,7 +27,7 @@ public class OlimpoCompiler {
 	}
     
     public void runLexychal(String codeFilePath) throws Exception {
-    	this.lexico = new Lexer(codeFilePath);
+    	this.lexico = new Lexical(codeFilePath);
   
         Token t = null;
         while((t = this.lexico.nextToken()) != null){
@@ -37,7 +37,7 @@ public class OlimpoCompiler {
     }
     
     public void runSintatic(String codeFilePath) throws Exception {
-    	this.lexico = new Lexer(codeFilePath);
+    	this.lexico = new Lexical(codeFilePath);
 		Parser sintatico = new Parser(lexico);
 		sintatico.s();
 		this.lexico.setIndiceConteudo(0);
@@ -51,7 +51,7 @@ public class OlimpoCompiler {
 		}
 	}
     
-    public Lexer getLexico() {
+    public Lexical getLexico() {
 		return this.lexico;
 	}
 

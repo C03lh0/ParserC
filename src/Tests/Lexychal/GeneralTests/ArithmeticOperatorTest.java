@@ -1,7 +1,7 @@
 package Tests.Lexychal.GeneralTests;
 
 import CompiladorL3.OlimpoCompiler;
-import CompiladorL3.Lexer;
+import CompiladorL3.Lexical;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class ArithmeticOperatorTest {
 
     @Test
     public void OnlyArithmeticOperator() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
@@ -43,7 +43,7 @@ public class ArithmeticOperatorTest {
 
     @Test
     public void OtherTokensWithArithmeticOperator() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);

@@ -9,13 +9,13 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import CompiladorL3.OlimpoCompiler;
-import CompiladorL3.Lexer;
+import CompiladorL3.Lexical;
 
 public class JustAnInputCharTest {
 	
     @Test
     public void JustAnIntegerChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -37,7 +37,7 @@ public class JustAnInputCharTest {
     }
     @Test
     public void JustAnArithmeticOperatorChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -59,7 +59,7 @@ public class JustAnInputCharTest {
     }
     @Test
     public void JustAnIdentifierOperatorChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -81,7 +81,7 @@ public class JustAnInputCharTest {
     }
     @Test
     public void JustASpecialCharacterChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -103,7 +103,7 @@ public class JustAnInputCharTest {
     }
     @Test
     public void JustARelationalOperatorChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);
@@ -126,7 +126,7 @@ public class JustAnInputCharTest {
 
     @Test
     public void JustAAssignmentOperatorChar() throws Exception {
-        Lexer lex;
+        Lexical lex;
         OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
 		FileWriter file = new FileWriter(path);

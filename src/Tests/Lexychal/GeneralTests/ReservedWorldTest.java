@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import CompiladorL3.OlimpoCompiler;
-import CompiladorL3.Lexer;
+import CompiladorL3.Lexical;
 
 public class ReservedWorldTest {
 		//[REPORT TO @C03lh0]
@@ -17,7 +17,7 @@ public class ReservedWorldTest {
 		//[POSITIVE CASES]
 	 	@Test
 	    public void ReservedWordsWithSpace () throws Exception {
-	        Lexer lex;
+	        Lexical lex;
 	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);
@@ -56,7 +56,7 @@ public class ReservedWorldTest {
 	 	
 	 	@Test
 	    public void ReservedWordsWithAndWithoutSpace() throws Exception {
-	        Lexer lex;
+	        Lexical lex;
 	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);
@@ -94,7 +94,7 @@ public class ReservedWorldTest {
 	 	
 	 	@Test
 	    public void OtherTokensWhithReservedWord() throws Exception {
-	        Lexer lex;
+	        Lexical lex;
 	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);

@@ -15,9 +15,9 @@ public class Token {
     private int type; //tipo do token
     private String lexeme; //conteúdo do token
     
-    public Token(String lexema, int tipo){
-        this.lexeme = lexema;
-        this.type = tipo;
+    public Token(String lexeme, int type){
+        this.lexeme = lexeme;
+        this.type = type;
     }
     
     public String getLexeme(){
