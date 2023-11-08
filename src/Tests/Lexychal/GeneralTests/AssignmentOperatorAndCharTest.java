@@ -10,8 +10,8 @@ import java.io.PrintWriter;
 import org.junit.Assert;
 import org.junit.Test;
 
-import CompiladorL3.CompiladorL3;
-import CompiladorL3.Lexico;
+import CompiladorL3.OlimpoCompiler;
+import CompiladorL3.Lexer;
 
 public class AssignmentOperatorAndCharTest {
 
@@ -27,12 +27,12 @@ public class AssignmentOperatorAndCharTest {
 		file.close();
 		
 		try {
-			CompiladorL3 c = new CompiladorL3();
+			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexico lex = c.getLexico();
+			Lexer lex = c.getLexico();
 			
-			assertEquals(2, lex.nextToken().getTipo());
-			assertEquals(2, lex.nextToken().getTipo());
+			assertEquals(2, lex.nextToken().getType());
+			assertEquals(2, lex.nextToken().getType());
 		} catch (Exception e) {
 			Assert.fail();
 		}
@@ -55,13 +55,13 @@ public class AssignmentOperatorAndCharTest {
 		file.close();
 		
 		try {
-			CompiladorL3 c = new CompiladorL3();
+			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexico lex = c.getLexico();
+			Lexer lex = c.getLexico();
 			
-			assertEquals(2, lex.nextToken().getTipo());
-			assertEquals(2, lex.nextToken().getTipo());
-			assertEquals(2, lex.nextToken().getTipo());
+			assertEquals(2, lex.nextToken().getType());
+			assertEquals(2, lex.nextToken().getType());
+			assertEquals(2, lex.nextToken().getType());
 			Assert.fail();
 		} catch (Exception e){
 			assertTrue(true);
@@ -85,14 +85,14 @@ public class AssignmentOperatorAndCharTest {
 		file.close();
 		
 		try {
-			CompiladorL3 c = new CompiladorL3();
+			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexico lex = c.getLexico();
+			Lexer lex = c.getLexico();
 			
-			assertEquals(4, lex.nextToken().getTipo());
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(4, lex.nextToken().getTipo());
+			assertEquals(4, lex.nextToken().getType());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(4, lex.nextToken().getType());
 		} catch (Exception e) {
 			Assert.fail();
 		}
@@ -116,24 +116,24 @@ public class AssignmentOperatorAndCharTest {
 		file.close();
 		
 		try {
-			CompiladorL3 c = new CompiladorL3();
+			OlimpoCompiler c = new OlimpoCompiler();
 			c.runLexychal(path);
-			Lexico lex = c.getLexico();
+			Lexer lex = c.getLexico();
 			
-			assertEquals(3, lex.nextToken().getTipo());
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(0, lex.nextToken().getTipo());
+			assertEquals(3, lex.nextToken().getType());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(0, lex.nextToken().getType());
 			
-			assertEquals(3, lex.nextToken().getTipo());
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(2, lex.nextToken().getTipo());
+			assertEquals(3, lex.nextToken().getType());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(2, lex.nextToken().getType());
 			
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(1, lex.nextToken().getTipo());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(1, lex.nextToken().getType());
 			
-			assertEquals(7, lex.nextToken().getTipo());
-			assertEquals(8, lex.nextToken().getTipo());
-			assertEquals(2, lex.nextToken().getTipo());
+			assertEquals(7, lex.nextToken().getType());
+			assertEquals(8, lex.nextToken().getType());
+			assertEquals(2, lex.nextToken().getType());
 		} catch (Exception e) {
 			Assert.fail();
 		}

@@ -1,6 +1,6 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
+import CompiladorL3.OlimpoCompiler;
 
 import org.junit.*;
 
@@ -16,7 +16,7 @@ public class BlockTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -25,7 +25,7 @@ public class BlockTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.assertTrue(true);
@@ -39,7 +39,7 @@ public class BlockTest {
 
     @Test
     public void withoutInitialKeyTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -50,7 +50,7 @@ public class BlockTest {
         String phrase = "Como você é burro cara! Abre as chaves do método.";
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.fail();
@@ -64,7 +64,7 @@ public class BlockTest {
 
     @Test
     public void withoutFinalKeyTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -75,7 +75,7 @@ public class BlockTest {
         String phrase = "Como você é burro cara! Fecha as chaves do método.";
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.fail();

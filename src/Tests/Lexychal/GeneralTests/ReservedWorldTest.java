@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 
 import org.junit.Test;
 
-import CompiladorL3.CompiladorL3;
-import CompiladorL3.Lexico;
+import CompiladorL3.OlimpoCompiler;
+import CompiladorL3.Lexer;
 
 public class ReservedWorldTest {
 		//[REPORT TO @C03lh0]
@@ -17,8 +17,8 @@ public class ReservedWorldTest {
 		//[POSITIVE CASES]
 	 	@Test
 	    public void ReservedWordsWithSpace () throws Exception {
-	        Lexico lex;
-	        CompiladorL3 compiler;
+	        Lexer lex;
+	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);
 			PrintWriter writeFile = new PrintWriter(file);
@@ -35,19 +35,19 @@ public class ReservedWorldTest {
 	        
 	        file.close();
 
-	        compiler = new CompiladorL3();
+	        compiler = new OlimpoCompiler();
 			compiler.runLexychal(path);
 			lex = compiler.getLexico();
 
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
 	        
 	      
 	        File delete = new File(path);
@@ -56,8 +56,8 @@ public class ReservedWorldTest {
 	 	
 	 	@Test
 	    public void ReservedWordsWithAndWithoutSpace() throws Exception {
-	        Lexico lex;
-	        CompiladorL3 compiler;
+	        Lexer lex;
+	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);
 			PrintWriter writeFile = new PrintWriter(file);
@@ -74,19 +74,19 @@ public class ReservedWorldTest {
 	        
 	        file.close();
 
-	        compiler = new CompiladorL3();
+	        compiler = new OlimpoCompiler();
 			compiler.runLexychal(path);
 			lex = compiler.getLexico();
 
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
 	      
 	        File delete = new File(path);
 			delete.delete();		
@@ -94,8 +94,8 @@ public class ReservedWorldTest {
 	 	
 	 	@Test
 	    public void OtherTokensWhithReservedWord() throws Exception {
-	        Lexico lex;
-	        CompiladorL3 compiler;
+	        Lexer lex;
+	        OlimpoCompiler compiler;
 	        String path = "codigoCompilador.txt";
 			FileWriter file = new FileWriter(path);
 			PrintWriter writeFile = new PrintWriter(file);
@@ -112,19 +112,19 @@ public class ReservedWorldTest {
 	        
 	        file.close();
 
-	        compiler = new CompiladorL3();
+	        compiler = new OlimpoCompiler();
 			compiler.runLexychal(path);
 			lex = compiler.getLexico();
 
-	        assertEquals(3, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(3, lex.nextToken().getTipo());
-	        assertEquals(3, lex.nextToken().getTipo());
-	        assertEquals(3, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
-	        assertEquals(7, lex.nextToken().getTipo());
+	        assertEquals(3, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(3, lex.nextToken().getType());
+	        assertEquals(3, lex.nextToken().getType());
+	        assertEquals(3, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
+	        assertEquals(7, lex.nextToken().getType());
 	      
 	        File delete = new File(path);
 			delete.delete();		

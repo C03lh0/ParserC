@@ -48,7 +48,7 @@ public class Semantic {
 		} else if (!theDecisionMakingArrayIsFull() && this.last3TokensIsDeclarationOrOperation[1] ==null) {
 			addTokensForDecisionMaking(token);
 			
-			if(token.getLexema().equals(";") && this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexema()) != null ) {
+			if(token.getLexeme().equals(";") && this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexeme()) != null ) {
 				this.state = 1;
 				executeStateOnlast2Tokens();
 				return;
@@ -56,8 +56,8 @@ public class Semantic {
 				this.state = 1;
 				executeStateOnlast2Tokens();
 				clearDecisionMakingArray();
-			} else if(last3TokensIsDeclarationOrOperation[1].getLexema().equals(";") && this.currentScope.getVariable(token.getLexema()) == null&& tokenIsAnUninitializedVariable(token) == false && this.last3TokensIsDeclarationOrOperation[2] == null || this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexema()) == null && tokenIsAnUninitializedVariable(token) && token.getLexema().equals("=") ) {
-				throw new Exception("Variable does not exist '" + last3TokensIsDeclarationOrOperation[0].getLexema() + "'");
+			} else if(last3TokensIsDeclarationOrOperation[1].getLexeme().equals(";") && this.currentScope.getVariable(token.getLexeme()) == null&& tokenIsAnUninitializedVariable(token) == false && this.last3TokensIsDeclarationOrOperation[2] == null || this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexeme()) == null && tokenIsAnUninitializedVariable(token) && token.getLexeme().equals("=") ) {
+				throw new Exception("Variable does not exist '" + last3TokensIsDeclarationOrOperation[0].getLexeme() + "'");
 			} 
 			return;
 		} else if (this.state == 0) {
@@ -71,25 +71,25 @@ public class Semantic {
 	}
 
 	private boolean isAnCloseKey(Token token) {
-		return token.getLexema().equals("}");
+		return token.getLexeme().equals("}");
 	}
 
 	private boolean isAnOpenKey(Token token) {
-		return token.getLexema().equals("{");
+		return token.getLexeme().equals("{");
 	}
 
 	private boolean isAnVariableType(Token token) {
-		return token.getLexema().equals("int")||token.getLexema().equals("char") || token.getLexema().equals("float");
+		return token.getLexeme().equals("int")||token.getLexeme().equals("char") || token.getLexeme().equals("float");
 	}
 
 	private boolean isAnIdentifier(Token token) {
-		return token.getTipo() == 3;
+		return token.getType() == 3;
 	}
 
 	public boolean tokenIsAnUninitializedVariable(Token currentToken) {
 		for (SDeclarationChecker sDeclarationChecker : declarationCheckers) {
 			String name = sDeclarationChecker.getCurrentDeclarationName();
-			if (name.equals(currentToken.getLexema()) && currentSDeclarationChecker.getSemanticSubject().last3TokensIsDeclarationOrOperation[2].getTipo() < 3) {
+			if (name.equals(currentToken.getLexeme()) && currentSDeclarationChecker.getSemanticSubject().last3TokensIsDeclarationOrOperation[2].getType() < 3) {
 				this.currentSDeclarationChecker = sDeclarationChecker;
 				return true;
 			}
@@ -125,7 +125,7 @@ public class Semantic {
 
 	private boolean isOperation() {
 		if(last3TokensIsDeclarationOrOperation[1] != null) {
-			return last3TokensIsDeclarationOrOperation[1].getTipo() == 5 || last3TokensIsDeclarationOrOperation[1].getTipo() == 4 ;
+			return last3TokensIsDeclarationOrOperation[1].getType() == 5 || last3TokensIsDeclarationOrOperation[1].getType() == 4 ;
 		}
 		return false;
 	}

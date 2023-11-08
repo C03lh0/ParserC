@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class Lexico {
+public class Lexer {
 	private char[] conteudo;
 	private int indiceConteudo;
 
-	public Lexico(String caminhoCodigoFonte) {
+	public Lexer(String caminhoCodigoFonte) {
 		try {
 			String conteudoStr;
 			conteudoStr = new String(Files.readAllBytes(Paths.get(caminhoCodigoFonte)));
@@ -60,14 +60,14 @@ public class Lexico {
 					lexema.append(currentChar);
 					//Modificado por @C03lh0
 					if(isReservedWorld(lexema.toString())) {
-						return new Token(lexema.toString(), Token.TIPO_PALAVRA_RESERVADA);
+						return new Token(lexema.toString(), Token.RESERVED_WORD_TYPE);
 					} else if (!this.hasNextChar()) {
-						return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+						return new Token(lexema.toString(), Token.IDENTIFIER_TYPE);
 					}
 					state = 1;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+					return new Token(lexema.toString(), Token.IDENTIFIER_TYPE);
 				}
 				break; 
 			case 2:
@@ -79,7 +79,7 @@ public class Lexico {
 					state = 3;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_INTEIRO);
+					return new Token(lexema.toString(), Token.INTEGER_TYPE);
 				}
 				break;
 			case 3:
@@ -96,19 +96,19 @@ public class Lexico {
 					state = 4;
 				} else {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_REAL);
+					return new Token(lexema.toString(), Token.REAL_TYPE);
 				}
 				break;
 			case 5:
 				this.backIndex();
-				return new Token(lexema.toString(), Token.TIPO_CARACTER_ESPECIAL);
+				return new Token(lexema.toString(), Token.SPECIAL_CARACTER_TYPE);
 			case 6:
 				if (isAssignmentOperator(currentChar)) {
 					this.backIndex();
 					state = 9;
 				} else  {
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_DE_ATRIBUICAO);
+					return new Token(lexema.toString(), Token.ASSIGNMENT_OPERADOR_TYPE);
 				}
 				break;
 			case 7:		
@@ -116,7 +116,7 @@ public class Lexico {
 					state = 7;
 					if (lexema.length() == 3) {
 						lexema.append(currentChar);
-						return new Token(lexema.toString(), Token.TIPO_CHAR);
+						return new Token(lexema.toString(), Token.CHAR_TYPE);
 					}
 				} else {
 					throw new RuntimeException("Erro: char invalido \"" + lexema.toString() + "\"");
@@ -124,16 +124,16 @@ public class Lexico {
 				break;
 			case 9:
 				if (!isPartOfAnRelationalOperator(currentChar, state, lexema) || !this.hasNextChar() || currentChar == '\n')
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+					return new Token(lexema.toString(), Token.RELACIONAL_OPERATOR_TYPE);
 				break;
 			case 10:
 				break;
 			case 11:
 				if(currentChar == '\n' || !isAArithmeticOperator(currentChar)){
 					this.backIndex();
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+					return new Token(lexema.toString(), Token.ARITHMETIC_OPERATOR_TYPE);
 				} else if (isADoublyArithmeticOperator(currentChar, lexema)) {
-					return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+					return new Token(lexema.toString(), Token.ARITHMETIC_OPERATOR_TYPE);
 				//Alterado por @C03lh0	Matheus's Token (++ or +++ | -- or ---)
 				} else if (this.isAArithmeticOperator(currentChar)){
 					if(isArithmeticOperatorEquals(currentChar, lexema) && counter<2) {
@@ -146,7 +146,7 @@ public class Lexico {
 				} 
 				break;
 			case 99:
-				return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO);
+				return new Token(lexema.toString(), Token.END_CODE_TYPE);
 				
 			}
 		}
@@ -273,19 +273,19 @@ public class Lexico {
 	
 	private Token returnCurrentToken(char currentChar, StringBuffer lexema) {
 		if (isLetterOrUnderscore(currentChar)) {
-			return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);
+			return new Token(lexema.toString(), Token.IDENTIFIER_TYPE);
 	   } else if (this.isDigit(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_INTEIRO);
+		   return new Token(lexema.toString(), Token.INTEGER_TYPE);
 	   } else if (isASpecialCharacter(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_CARACTER_ESPECIAL);
+		   return new Token(lexema.toString(), Token.SPECIAL_CARACTER_TYPE);
 	   } else if (currentChar == '$') {
-		   return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO);
+		   return new Token(lexema.toString(), Token.END_CODE_TYPE);
 	   } else if (isAssignmentOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_DE_ATRIBUICAO);
+		   return new Token(lexema.toString(), Token.ASSIGNMENT_OPERADOR_TYPE);
 	   } else if (isRelationalOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+		   return new Token(lexema.toString(), Token.RELACIONAL_OPERATOR_TYPE);
 	   } else if (isAArithmeticOperator(currentChar)) {
-		   return new Token(lexema.toString(), Token.TIPO_OPERADOR_ARITMETICO);
+		   return new Token(lexema.toString(), Token.ARITHMETIC_OPERATOR_TYPE);
 	   }  else {
 		   lexema.append(currentChar);
 		   throw new RuntimeException("Erro: token invalido \"" + lexema.toString() + "\"");

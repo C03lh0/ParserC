@@ -1,6 +1,6 @@
 package Tests.Sintatic;
 
-import CompiladorL3.CompiladorL3;
+import CompiladorL3.OlimpoCompiler;
 
 import org.junit.*;
 
@@ -16,7 +16,7 @@ public class IterationTest {
 
     @Test
     public void correctSyntaxTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -27,7 +27,7 @@ public class IterationTest {
         file.close();
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.assertTrue(true);
@@ -42,7 +42,7 @@ public class IterationTest {
     //DISPARANDO ERRO DO METODO BLOCK DE FECHAR }
     @Test
     public void withoutWhileTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -55,7 +55,7 @@ public class IterationTest {
         String phrase = "Cade a palavra reservada da condicional pra começar bença?";
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.fail();
@@ -69,7 +69,7 @@ public class IterationTest {
 
     @Test
     public void withoutInitialParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -82,7 +82,7 @@ public class IterationTest {
         String phrase = "Ô Bença coloca o ( para iniciar a expreção relacional do while";
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.fail();
@@ -96,7 +96,7 @@ public class IterationTest {
 
     @Test
     public void withoutFinalParentesisTest() throws Exception {
-        CompiladorL3 compiler;
+        OlimpoCompiler compiler;
         String path = "codigoCompilador.txt";
         FileWriter file = new FileWriter(path);
         PrintWriter writeFile = new PrintWriter(file);
@@ -109,7 +109,7 @@ public class IterationTest {
         String phrase = "Ô Bença coloca o ) para finalizar a expreção relacional do while";
 
         try {
-            compiler = new CompiladorL3();
+            compiler = new OlimpoCompiler();
             compiler.runSintatic(path);
             
             Assert.fail();

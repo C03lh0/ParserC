@@ -2,21 +2,21 @@ package CompiladorL3;
 
 import CompiladorL3.semantic.Semantic;
 
-public class CompiladorL3 {
+public class OlimpoCompiler {
 	
-	private Lexico lexico;
-	private Sintatico sintatico;
+	private Lexer lexico;
+	private Parser sintatico;
     private Semantic semantic;
     
     public void runSemantic(String codeFilePath) throws Exception {
-		this.lexico = new Lexico(codeFilePath);
+		this.lexico = new Lexer(codeFilePath);
 		this.semantic = new Semantic();
         
         Token token = this.lexico.nextToken();
         token = this.lexico.nextToken();
 		token = this.lexico.nextToken();
 		do {
-			if (token.getTipo() != Token.TIPO_FIM_CODIGO)
+			if (token.getType() != Token.END_CODE_TYPE)
 				semanticAnalize(token);
 			
 			//System.out.println(token.toString());
@@ -27,7 +27,7 @@ public class CompiladorL3 {
 	}
     
     public void runLexychal(String codeFilePath) throws Exception {
-    	this.lexico = new Lexico(codeFilePath);
+    	this.lexico = new Lexer(codeFilePath);
   
         Token t = null;
         while((t = this.lexico.nextToken()) != null){
@@ -37,25 +37,25 @@ public class CompiladorL3 {
     }
     
     public void runSintatic(String codeFilePath) throws Exception {
-    	this.lexico = new Lexico(codeFilePath);
-		Sintatico sintatico = new Sintatico(lexico);
+    	this.lexico = new Lexer(codeFilePath);
+		Parser sintatico = new Parser(lexico);
 		sintatico.s();
 		this.lexico.setIndiceConteudo(0);
     }
 
 	private void semanticAnalize(Token token) throws Exception {
-		if((token.getTipo() != 7 && !token.getLexema().equals("(") &&
-				!token.getLexema().equals(")")) || token.getLexema().equals("int") ||
-				token.getLexema().equals("char") || token.getLexema().equals("float")){
+		if((token.getType() != 7 && !token.getLexeme().equals("(") &&
+				!token.getLexeme().equals(")")) || token.getLexeme().equals("int") ||
+				token.getLexeme().equals("char") || token.getLexeme().equals("float")){
 			this.semantic.runSemantic(token);
 		}
 	}
     
-    public Lexico getLexico() {
+    public Lexer getLexico() {
 		return this.lexico;
 	}
 
-    public Sintatico getSintatico() {
+    public Parser getSintatico() {
         return this.sintatico;
     }
 
