@@ -31,7 +31,7 @@ public class RelationalOperatorTest {
         file.close();
 
         compiler = new OlimpoCompiler();
-		compiler.runLexychal(path);
+		compiler.runLexical(path);
 		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(4, lex.nextToken().getType());
@@ -63,7 +63,7 @@ public class RelationalOperatorTest {
         file.close();
 
         compiler = new OlimpoCompiler();
-		compiler.runLexychal(path);
+		compiler.runLexical(path);
 		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(1, lex.nextToken().getType());
@@ -94,7 +94,7 @@ public class RelationalOperatorTest {
         file.close();
 
         compiler = new OlimpoCompiler();
-		compiler.runLexychal(path);
+		compiler.runLexical(path);
 		lex = compiler.getLexicalAnalyzer();
 
         assertEquals(1, lex.nextToken().getType());

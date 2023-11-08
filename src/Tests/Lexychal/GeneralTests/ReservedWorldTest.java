@@ -36,7 +36,7 @@ public class ReservedWorldTest {
 	        file.close();
 
 	        compiler = new OlimpoCompiler();
-			compiler.runLexychal(path);
+			compiler.runLexical(path);
 			lex = compiler.getLexicalAnalyzer();
 
 	        assertEquals(7, lex.nextToken().getType());
@@ -75,7 +75,7 @@ public class ReservedWorldTest {
 	        file.close();
 
 	        compiler = new OlimpoCompiler();
-			compiler.runLexychal(path);
+			compiler.runLexical(path);
 			lex = compiler.getLexicalAnalyzer();
 
 	        assertEquals(7, lex.nextToken().getType());
@@ -113,7 +113,7 @@ public class ReservedWorldTest {
 	        file.close();
 
 	        compiler = new OlimpoCompiler();
-			compiler.runLexychal(path);
+			compiler.runLexical(path);
 			lex = compiler.getLexicalAnalyzer();
 
 	        assertEquals(3, lex.nextToken().getType());

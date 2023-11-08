@@ -6,7 +6,7 @@ public class Main {
 		String path = "src/CompiladorL3/codigo.txt";
 		OlimpoCompiler c = new OlimpoCompiler();
 		try {
-			c.runLexychal(path);
+			c.runLexical(path);
 			c.runSyntax(path);
 			c.runSemantic(path);
 		} catch (Exception e) {
