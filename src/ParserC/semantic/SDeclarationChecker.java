@@ -50,7 +50,9 @@ public class SDeclarationChecker  {
 		} else if (hasTheValueAlreadyBeenEntered() && isADeclarationTerminator(currentPart)) {
 			currentVariableDeclaration.add(currentPart.getLexema());
 			setInitializedStatusToDeclaration();
-		} else if(isAValidIdentifier(currentPart) && this.currentScope.getVariable(currentPart.getLexema()) == null){
+		}else if (isAnReassignment(currentPart)) {
+			currentDeclarationStatus = "reassignment";
+		} else if(isAValidIdentifier(currentPart) && this.currentScope.getVariable(currentPart.getLexema()) == null && !currentDeclarationStatus.equals("reassignment")){
 			throw new Exception("Variable does not exist '" + currentPart.getLexema() + "' <-");
 		}
 	}
@@ -100,6 +102,8 @@ public class SDeclarationChecker  {
 			if (compositionVar == null) {
 				return false;
 			}
+			currentPart.setLexema(compositionVar.getValue());
+			currentPart.setType(compositionVar.getType().getTypeNumber());
 			return compositionVar.getType().getTypeNumber() == Type
 					.checkIfVariableTypeIsValid(currentVariableDeclaration.get(0));
 		}
@@ -109,6 +113,15 @@ public class SDeclarationChecker  {
 
 	public void notifySubject() {
 		semanticSubject.updateDeclarationCheckers();
+	}
+
+	public boolean isAnReassignment(Token token) {
+		Variable variable = currentScope.getVariable(token.getLexema());
+		boolean isAnReassignment = this.currentVariableDeclaration.size() == 0 && variable != null;
+		currentVariableDeclaration.add(variable.getType().getString());		
+		currentVariableDeclaration.add(token.getLexema());
+		currentScope.removeDeclaredVariable(token.getLexema());
+		return isAnReassignment;
 	}
 
 	public void setInitializedStatusToDeclaration() {

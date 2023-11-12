@@ -42,10 +42,25 @@ public class Semantic {
 			this.last3TokensIsDeclarationOrOperation[2] = token;
 			this.currentSDeclarationChecker.isPartOfADeclaration(token);
 			return;
-		} else if (isAnIdentifier(token) && !theDecisionMakingArrayIsFull() ) {
-			addTokensForDecisionMaking(token);
+		} else if (isAnIdentifier(token) && !theDecisionMakingArrayIsFull() || isAnReassignment()) {
+			Variable variableAlreadyDeclared = null;
+
+			if (last3TokensIsDeclarationOrOperation[0] != null) {
+				for (Scope currentScope : scopes) {
+					variableAlreadyDeclared = currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexema());
+				}
+				if (variableAlreadyDeclared != null ) {
+					this.state = 1;
+					executeStateOnlast2Tokens();
+				}
+				executeCurrentState(token);
+
+			}else{
+				addTokensForDecisionMaking(token);
+			}
+
 			return;
-		} else if (!theDecisionMakingArrayIsFull() && this.last3TokensIsDeclarationOrOperation[1] ==null) {
+		} else if (!theDecisionMakingArrayIsFull() && this.last3TokensIsDeclarationOrOperation[1] ==null && currentSDeclarationChecker.getCurrentVariableDeclaration().size() < 3) {
 			addTokensForDecisionMaking(token);
 			
 			if(token.getLexema().equals(";") && this.currentScope.getVariable(last3TokensIsDeclarationOrOperation[0].getLexema()) != null ) {
@@ -60,14 +75,23 @@ public class Semantic {
 				throw new Exception("Variable does not exist '" + last3TokensIsDeclarationOrOperation[0].getLexema() + "'");
 			} 
 			return;
-		} else if (this.state == 0) {
+		}
+		
+		 else if (this.state == 0) {
 			checkIfIsDeclarationOrOparation(token);
 			return;
 		} 
-		
-		
-		
+
+
+
 		executeCurrentState(token);
+	}
+
+	private boolean isAnReassignment() {
+		if (last3TokensIsDeclarationOrOperation[1] == null || last3TokensIsDeclarationOrOperation[0] == null) {
+			return false;
+		}
+		return last3TokensIsDeclarationOrOperation[0].getType() == 3 && last3TokensIsDeclarationOrOperation[1].getType() == 8 && last3TokensIsDeclarationOrOperation[2] == null;
 	}
 
 	private boolean isAnCloseKey(Token token) {
@@ -182,7 +206,7 @@ public class Semantic {
 	
 	public void executeStateOnlast2Tokens() throws Exception {
 		
-		if(!tokenIsAnUninitializedVariable(last3TokensIsDeclarationOrOperation[0]) && last3TokensIsDeclarationOrOperation[0] != null) {
+		if(last3TokensIsDeclarationOrOperation[0] != null) {
 			executeCurrentState(last3TokensIsDeclarationOrOperation[0]);
 		}
 		if(last3TokensIsDeclarationOrOperation[1] != null){

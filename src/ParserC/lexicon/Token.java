@@ -15,17 +15,43 @@ public class Token {
     private int type; //tipo do token
     private String lexema; //conteúdo do token
     
+    public Token(String lexema, String type){
+        this.lexema = lexema;
+        this.type = getIntForTypeFromNameOfType(type);
+    }
+
     public Token(String lexema, int type){
         this.lexema = lexema;
         this.type = type;
+    }
+
+    public int getIntForTypeFromNameOfType(String type) {
+        switch (type) {
+            case "int":
+                return 0;
+            case "real":
+                return 1;
+            case "char":
+                return 2;
+            default:
+                return -1;
+        }
     }
     
     public String getLexema(){
         return this.lexema;
     }
+
+    public void setLexema(String lexema) {
+        this.lexema = lexema;
+    }
     
     public int getType(){
         return this.type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
     
     @Override
