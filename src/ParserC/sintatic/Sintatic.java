@@ -266,7 +266,7 @@ public class Sintatic {
     }
 
     private void arithmeticExpressionDerivated() throws Exception {
-        //Modified for @aquiles
+        
         if (this.token.getType() == Token.TYPE_ARITHMETICAL_OPERATOR) {
             this.arithmeticExpressionOperator();
             this.arithmeticExpressionTerm();
@@ -303,7 +303,7 @@ public class Sintatic {
     }
 
     private void arithmeticExpressionOperator() throws Exception {
-        //Modified for @aquilesR
+       
         if (this.token.getType() == Token.TYPE_ARITHMETICAL_OPERATOR) {
             this.token = lexicalAnalyzer.nextToken();
         } else {
